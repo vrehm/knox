@@ -82,6 +82,9 @@ export default {
       this.count = 0
     })
   },
+  beforeDestroy() {
+    this.$nuxt.$off('logout')
+  },
 }
 </script>
 

@@ -284,7 +284,8 @@ export default {
   methods: {
     async logout() {
       await this.$auth.logout()
-      this.$router.push('/login/')
+      window.location.reload(true)
+      // this.$router.push('/login/')
     },
   },
 }

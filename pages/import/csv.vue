@@ -14,6 +14,12 @@
       :message="success"
       class="mb-8"
     />
+    <notification-message
+      v-if="loading"
+      type="green"
+      message="Loading..."
+      class="mb-8"
+    />
 
     <client-only placeholder="Loading...">
       <vue-csv-import
@@ -103,25 +109,37 @@ export default {
         'owner',
       ],
       canIgnore: true,
+      loading: null,
       inputClass:
         'secondary-button hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-indigo-200',
     }
   },
   methods: {
     async handleSubmit(event) {
+      this.loading = true
       const data = event
+      const promises = []
 
       for (let index = 0; index < data.length; index++) {
         const el = data[index]
 
         try {
-          await this.$axios.post(this.importUrl, el)
+          promises.push(await this.$axios.post(this.importUrl, el))
           this.error = null
           this.success = `New entry created`
         } catch (e) {
           this.error = e.response.data.message[0].messages[0].message
         }
       }
+
+      Promise.all(promises)
+        .then(() => {
+          this.success = `Finished`
+          this.loading = false
+        })
+        .catch((e) => {
+          this.error = e
+        })
     },
   },
 }

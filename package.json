@@ -2,6 +2,9 @@
     "name": "knox",
     "version": "1.0.0",
     "private": true,
+    "engines": {
+        "node": "^14 || ^12"
+    },
     "scripts": {
         "dev": "nuxt",
         "build": "nuxt build",
@@ -26,9 +29,7 @@
         "@nuxtjs/auth": "^4.9.1",
         "@nuxtjs/axios": "^5.12.2",
         "@nuxtjs/pwa": "^3.2.2",
-        "@tailwindcss/ui": "^0.6.2",
         "core-js": "^3.6.5",
-        "nan": "^2.14.2",
         "nuxt": "^2.14.7",
         "vue-csv-import": "^3.3.5"
     },
@@ -45,11 +46,13 @@
         "eslint-plugin-nuxt": "^1.0.0",
         "eslint-plugin-prettier": "^3.1.4",
         "husky": "^4.3.0",
-        "lint-staged": "^10.5.0",
+        "lint-staged": "^10.5.1",
         "nuxt-purgecss": "^1.0.0",
         "prettier": "^2.1.2",
         "stylelint": "^13.7.2",
         "stylelint-config-prettier": "^8.0.2",
-        "stylelint-config-standard": "^20.0.0"
+        "stylelint-config-standard": "^20.0.0",
+        "@tailwindcss/ui": "^0.6.2",
+        "nan": "^2.14.2"
     }
 }

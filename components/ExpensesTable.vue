@@ -44,14 +44,17 @@
                     <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                     <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                   </svg>
-                  {{ expense.category }}
+                  <span class="truncate">
+                    {{ expense.category }}
+                  </span>
                 </div>
+
                 <div
-                  class="mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0"
+                  v-if="expense.isRecurring"
+                  class="mr-6 mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0"
                 >
                   <!-- Heroicon name: clock -->
                   <svg
-                    v-if="expense.isRecurring"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
@@ -63,10 +66,15 @@
                       clip-rule="evenodd"
                     />
                   </svg>
+                  <span>Dépense récurrente</span>
+                </div>
 
+                <div
+                  v-if="expense.isExceptional"
+                  class="mr-6 mt-2 flex items-center text-sm leading-5 text-gray-500 sm:mt-0"
+                >
                   <!-- Heroicon name: exclamation circle -->
                   <svg
-                    v-if="expense.isExceptional"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
@@ -78,6 +86,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
+                  <span>Dépense exceptionnelle</span>
                 </div>
               </div>
               <div

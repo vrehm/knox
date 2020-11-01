@@ -70,7 +70,8 @@ export default {
       defaults: { baseURL },
     } = $axios
     const count = await $axios.$get(baseURL + '/expenses/count/')
-    const limit = Math.round(count / 10)
+    // const limit = Math.round(count / 10)
+    const limit = -1
     const data = await $axios.$get(baseURL + '/expenses?_limit=' + limit)
     const expenses = []
 

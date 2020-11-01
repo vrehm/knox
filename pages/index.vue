@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div v-if="isAuthenticated">
+    <div v-if="isAuthenticated" class="w-full">
       <div class="text-xl w-full pb-12">
         {{ count }} dépenses comptabilisées.
       </div>
       <expenses-table
         v-if="count > 0"
-        class="w-full pb-12"
+        class="w-full mb-12"
         :expenses="expenses"
       />
 
@@ -70,8 +70,24 @@ export default {
       defaults: { baseURL },
     } = $axios
     const count = await $axios.$get(baseURL + '/expenses/count/')
-    const expenses = await $axios.$get(baseURL + '/expenses?_limit=-1')
-    return { count, expenses }
+    const limit = Math.round(count / 10)
+    const data = await $axios.$get(baseURL + '/expenses?_limit=' + limit)
+    const expenses = []
+
+    for (const value of Object.values(data)) {
+      const expense = {
+        label: value.label,
+        amount: value.amount,
+        dateOp: value.dateOp,
+        isExceptional: value.isExceptional,
+        isRecurring: value.isRecurring,
+        category: value.category.name,
+        month: value.month,
+      }
+      expenses.push(expense)
+    }
+
+    return { count, limit, expenses }
   },
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
@@ -90,6 +106,6 @@ export default {
 
 <style>
 .container {
-  @apply h-screen w-full flex flex-1 flex-wrap justify-center items-center text-center mx-auto pt-24;
+  @apply min-h-screen w-full flex flex-1 flex-wrap justify-center items-center text-center mx-auto pt-24;
 }
 </style>

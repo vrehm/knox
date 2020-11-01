@@ -90,7 +90,10 @@
 </template>
 
 <script>
+import { VueCsvImport } from 'vue-csv-import'
+
 export default {
+  components: { VueCsvImport },
   data() {
     return {
       csv: null,

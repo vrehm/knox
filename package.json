@@ -52,7 +52,7 @@
         "stylelint": "^13.7.2",
         "stylelint-config-prettier": "^8.0.2",
         "stylelint-config-standard": "^20.0.0",
-        "@tailwindcss/ui": "^0.6.2",
+        "@tailwindcss/ui": "^0.7.0",
         "nan": "^2.14.2"
     }
 }
